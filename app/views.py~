@@ -72,22 +72,6 @@ def login():
 def logout():
     session['logged_in'] = False
     return redirect(url_for('login'))
-    
-@app.route('/filelisting')
-def filelisting():
-    """list files in directory"""
-    return render_template("filelisting.html", fileLst=getfiles())
-    
-
-def getfiles():
-    fileLst = []
-    for subdir, dirs, files in os.walk("app/static/uploads"):
-        for fle in files:
-            if fle[-4:] == '.jpg':
-                fileLst.append("""<li> <img src="/static/uploads/{}" alt="picture" </li>""".format(fle))
-            else:
-                fileLst.append("<li> {} </li>".format(fle))
-    return fileLst
   
 ###
 # The functions below should be applicable to all Flask apps.
